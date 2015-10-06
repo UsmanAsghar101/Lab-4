@@ -1,0 +1,221 @@
+<!DOCTYPE>
+<html>
+<head>
+<title>Lab # 3</title>
+<style>
+
+@-webkit-keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: -100% 0; }
+}
+@keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: -100% 0; }
+}
+
+@-webkit-keyframes obs {
+0%{
+position:absolute;
+right:20%;
+}
+20%{
+position:absolute;
+right:40%;
+}
+40%{
+position:absolute;
+right:60%;
+}
+60%{
+position:absolute;
+right:80%;
+}
+100%{
+position:absolute;
+right:100%;
+}
+
+
+
+}
+@keyframes obs {
+0%{
+position:absolute;
+right:20%;
+}
+20%{
+position:absolute;
+right:40%;
+}
+40%{
+position:absolute;
+right:60%;
+}
+60%{
+position:absolute;
+right:80%;
+}
+100%{
+position:absolute;
+right:100%;
+}
+}
+
+
+#image
+{
+position:absolute;
+top:0px;
+height:100%;
+width:100%;
+
+background-image:url(2.png);
+background-position:0px 0px;
+
+animation: animatedBackground 10s linear infinite;
+
+
+}
+
+#plane
+
+{
+position : absolute;
+top:50%;
+
+}
+
+#obstacle{
+
+position:absolute;
+top:20px;
+right:10px;
+
+animation: obs 10s linear infinite;
+
+}
+
+</style>
+
+</head>
+
+<body>
+<script type = "text/javascript">
+
+function Down(){
+		
+var element = document.getElementById('plane');
+element.style.top = parseInt(element.style.top) + 10 + 'px';
+console.log( parseInt(element.style.top));
+}
+
+function Up(){
+		
+var element = document.getElementById('plane');
+element.style.top = parseInt(element.style.top) - 10 + 'px';
+console.log( parseInt(element.style.top));
+}
+
+a = setInterval(function () {
+
+var div = document.getElementById("obstacle");
+    if (div.getBoundingClientRect) {        // Internet Explorer, Firefox 3+, Google Chrome, Opera 9.5+, Safari 4+
+        var rect = div.getBoundingClientRect ();
+        x = rect.left;
+        y = rect.top;
+        b = rect.bottom;
+        r = rect.right;
+        var positionsArray = [x,y,b,r];
+
+    }
+
+var div2 = document.getElementById("plane");
+    if (div2.getBoundingClientRect) {        // Internet Explorer, Firefox 3+, Google Chrome, Opera 9.5+, Safari 4+
+        var rect2 = div2.getBoundingClientRect ();
+        x2 = rect2.left;
+        y2 = rect2.top;
+        b2 = rect2.bottom;
+        r2 = rect2.right;
+
+        var positionsArray2 = [x2,y2,b2,r2];
+        
+
+    }
+
+	overlap = !(r2 < x || x2 > r || b2 < y || y2 > b);
+
+if(overlap){
+	/*hide the plane on collision*/
+        document.getElementById("plane").style.display = "none";
+
+	/*stop the obstacle*/
+	document.getElementById("obstacle").style.animationPlayState = "paused";
+	
+	/*stop background */
+	document.getElementById("image").style.animationPlayState = "paused";
+
+	
+      
+        clearInterval(a);
+    }
+}, 100);
+
+
+function getObs(){
+    var div = document.getElementById("obstacle");
+    if (div.getBoundingClientRect) {        // Internet Explorer, Firefox 3+, Google Chrome, Opera 9.5+, Safari 4+
+        var rect = div.getBoundingClientRect ();
+        x = rect.left;
+        y = rect.top;
+        b = rect.bottom;
+        r = rect.right;
+        var positionsArray = [x,y,b,r];
+
+        return positionsArray;
+    }
+
+    
+}
+
+function getPlane(){
+    /*get position of plane*/
+    var div2 = document.getElementById("plane");
+    if (div2.getBoundingClientRect) {        // Internet Explorer, Firefox 3+, Google Chrome, Opera 9.5+, Safari 4+
+        var rect2 = div2.getBoundingClientRect ();
+        x2 = rect2.left;
+        y2 = rect2.top;
+        b2 = rect2.bottom;
+        r2 = rect2.right;
+
+        var positionsArray2 = [x2,y2,b2,r2];
+        return positionsArray2;
+
+    }
+
+   
+}
+
+
+
+</script>
+
+
+
+<div id="image">
+<div id="plane" style = "top :1px;">
+<img src=Plane.png>
+</div>
+<div id="obstacle">
+<img src=3.png width=100px>
+</div>
+
+<div style="position:absolute;bottom:10%;left:6%">
+<button type="button" onClick="Down();">Down</button>
+<button type="button" onClick="Up();" >Up</button>
+</div>
+</div>
+
+</body>
+
+
+</html>

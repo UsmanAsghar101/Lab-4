@@ -1,0 +1,61 @@
+<!DOCTYPE>
+<html>
+<head>
+<title>Lab # 3</title>
+<style>
+
+@-webkit-keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: -100% 0; }
+}
+@keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: -100% 0; }
+}
+#image
+{
+position:absolute;
+top:0px;
+height:100%;
+width:100%;
+
+background-image:url(2.png);
+background-position:0px 0px;
+
+animation: animatedBackground 10s linear infinite;
+
+
+}
+
+#plane:target
+
+{
+position : absolute;
+top:50%;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+<body>
+
+
+<div id="image">
+<div id="plane">
+<img src=Plane.png>
+</div>
+<div style="position:absolute;bottom:10%;left:6%">
+<a href="#plane"><button type="button" >Up</button></a>
+<a href="#none"><button type="button" >Down</button></a>
+</div>
+</div>
+
+</body>
+
+
+</html>
